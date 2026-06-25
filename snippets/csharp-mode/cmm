@@ -1,0 +1,9 @@
+# name: summary comment (full)
+# key: cmm
+# --
+/// <summary>
+/// ${1:Summary}
+/// </summary>
+/// <param name="${2:param1}">${3:description}</param>
+/// <param name="${4:param2}">${5:description}</param>
+/// <returns>${6:description}</returns>

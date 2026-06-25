@@ -1,0 +1,6 @@
+# name: summary comment (short)
+# key: cm
+# --
+/// <summary>
+/// ${1:Summary}
+/// </summary>

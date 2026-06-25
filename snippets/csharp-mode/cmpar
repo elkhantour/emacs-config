@@ -1,0 +1,4 @@
+# name: param tag
+# key: cmpar
+# --
+/// <param name="${1:param}">${2:description}</param>

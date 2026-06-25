@@ -1,0 +1,4 @@
+# name: return tag
+# key: cmret
+# --
+/// <returns>${1:description}</returns>

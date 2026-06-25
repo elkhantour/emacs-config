@@ -16,13 +16,17 @@
 (load "~/.emacs.d/multicursors.el")
 
 ;; dashboard
-(load "~/.emacs.d/dashboard.el")
+; (load "~/.emacs.d/dashboard.el")
 
 ;; save sessions
 ;; (load "~/.emacs.d/desktop.el")
 
 ;; tabs
 (load "~/.emacs.d/tabs.el")
+
+;; unity
+(load "~/.emacs.d/unity/init.el")
+(load "~/.emacs.d/unity/unity.el")
 
 ;; wgsl-mode
 (load "~/.emacs.d/code/wgsl-mode.el")
@@ -64,3 +68,14 @@
 (setq backup-directory-alist (list (cons ".*" backup-dir)))
 (setq auto-save-list-file-prefix autosave-dir)
 (setq auto-save-file-name-transforms `((".*" ,autosave-dir t)))
+
+
+;; Hide unecessary file
+;; Source - https://stackoverflow.com/a/43632653
+(require 'dired-x)
+(add-hook 'dired-mode-hook #'dired-omit-mode)
+(setq dired-omit-files
+      (rx (or (seq bol (? ".") "#")
+              (seq bol "." eol)
+	      (seq "." "DS_Store" eol)
+              (seq "." "meta" eol))))

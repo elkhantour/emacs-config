@@ -1,0 +1,6 @@
+# name: remarks tag
+# key: cmrem
+# --
+/// <remarks>
+/// ${1:Details}
+/// </remarks>

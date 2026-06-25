@@ -99,14 +99,15 @@
 
 
 
+;; DELETEME
 ;; treesite-auto
-(use-package treesit-auto
-  :ensure t
-  :custom
-  (treesit-auto-install 'prompt)
-  :config
-  (treesit-auto-add-to-auto-mode-alist 'all)
-  (global-treesit-auto-mode))
+;; (use-package treesit-auto
+;;  :ensure t
+;;  :custom
+;;  (treesit-auto-install 'prompt)
+;;  :config
+;;  (treesit-auto-add-to-auto-mode-alist 'all)
+;;  (global-treesit-auto-mode))
 
 
 
@@ -120,7 +121,13 @@
 (use-package yasnippet-snippets
   :ensure t)
 
+;; tells company to works with yassnippet
+(setq company-backends '((company-yasnippet company-capf)))
+
 
 ;; NASM assembly handling
 (require 'nasm-mode)
 (add-to-list 'auto-mode-alist '("\\.nasm\\'" . nasm-mode))
+
+;; C# Mode
+(add-to-list 'auto-mode-alist '("\\.cs\\'" . csharp-mode))

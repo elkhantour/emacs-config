@@ -15,13 +15,14 @@
 ;;   (add-hook 'prog-mode-hook #'format-all-ensure-formatter))
 
 
+;; M-: (format-all--language-id-buffer) to know the language id name
 (use-package format-all
   :commands format-all-mode
   :hook (prog-mode . format-all-mode)
   :config
   (setq-default format-all-formatters
-                '(("CSS"     (prettier))
-		  ("SCSS"    (prettier)))))
+                '(("CSS"         (prettier))
+		  ("SCSS"        (prettier)))))
 
 
 (defun my/format-buffer ()
