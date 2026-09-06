@@ -37,6 +37,8 @@
 ;; format
 (load "~/.emacs.d/code/format.el")
 
+;; dired
+(load "~/.emacs.d/dired.el")
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -69,13 +71,3 @@
 (setq auto-save-list-file-prefix autosave-dir)
 (setq auto-save-file-name-transforms `((".*" ,autosave-dir t)))
 
-
-;; Hide unecessary file
-;; Source - https://stackoverflow.com/a/43632653
-(require 'dired-x)
-(add-hook 'dired-mode-hook #'dired-omit-mode)
-(setq dired-omit-files
-      (rx (or (seq bol (? ".") "#")
-              (seq bol "." eol)
-	      (seq "." "DS_Store" eol)
-              (seq "." "meta" eol))))
