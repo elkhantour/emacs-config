@@ -6,9 +6,6 @@
 ;; window
 (load "~/.emacs.d/window.el")
 
-;; code
-(load "~/.emacs.d/code/code.el")
-
 ;; theme
 (load "~/.emacs.d/theme.el")
 
@@ -24,18 +21,8 @@
 ;; tabs
 (load "~/.emacs.d/tabs.el")
 
-;; unity
-(load "~/.emacs.d/unity/init.el")
-(load "~/.emacs.d/unity/unity.el")
-
-;; wgsl-mode
-(load "~/.emacs.d/code/wgsl-mode.el")
-
-;; lsp
-(load "~/.emacs.d/code/lsp.el")
-
-;; format
-(load "~/.emacs.d/code/format.el")
+;; code
+(load "~/.emacs.d/code/index.el")
 
 ;; dired
 (load "~/.emacs.d/dired.el")
