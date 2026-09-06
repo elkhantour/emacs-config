@@ -1,3 +1,6 @@
+;; multicursors
+(load "~/.emacs.d/code/multicursors.el")
+
 ;; code
 (load "~/.emacs.d/code/code.el")
 
@@ -13,3 +16,6 @@
 
 ;; format
 (load "~/.emacs.d/code/format.el")
+
+;; slang mode with lsp support
+(load "~/.emacs.d/code/slang-init.el")
