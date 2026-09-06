@@ -29,30 +29,39 @@
   "Set up a specific window layout:
 - Left: Main window showing dired.
 - Right (Top): Also showing dired.
-- Right (Bottom): Shell in the current directory."
+- Right (Bottom): Shell in the current directory, renamed to
+  \"shell - <directory>\"."
   (interactive)
   (delete-other-windows)
   ;; Create the left window first
   (let* ((main (selected-window))
          (right (split-window main nil 'right))
-         (bottom-right (split-window right nil 'below)))
+         (bottom-right (split-window right nil 'below))
+         (dir-name (file-name-nondirectory
+                    (directory-file-name default-directory))))
     ;; Open Dired in the left window (main)
     (dired default-directory)
-
     ;; Open Dired in the top-right window
     (select-window right)
     (dired default-directory)
-
     ;; Open Shell in the bottom-right window
     (select-window bottom-right)
     (shell)
-
+    (rename-buffer (format "shell - %s" dir-name) t)
     ;; Return focus to main window (left)
     ;; (select-window main)
     ))
-
 (global-set-key (kbd "C-c c") 'code-layout) ;; Bind to a shortcut
 
+;; Rename created shell with a unique name according to time
+(defun my/shell-buffer-name ()
+  "Generate a unique shell buffer name based on the current time (HHMMSS)."
+  (generate-new-buffer-name
+   (format "shell - %s" (format-time-string "%H%M%S"))))
+
+(advice-add 'shell :around
+            (lambda (orig-fun &rest args)
+              (apply orig-fun (or (car args) (my/shell-buffer-name)) (cdr args))))
 
 ;; git gutter
 (use-package git-gutter
