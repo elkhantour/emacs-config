@@ -15,26 +15,26 @@
 
 ;; lsp-mode setup
 (require 'lsp-mode)
+;(lsp-register-client
+; (make-lsp-client
+;  :new-connection (lsp-stdio-connection slang-lsp-server-executable)
+;  :major-modes '(slang-mode)
+;  :server-id 'slang-lsp))
+
 (lsp-register-client
  (make-lsp-client
-  :new-connection (lsp-stdio-connection slang-lsp-server-executable)
-  :major-modes '(slang-mode)
-  :server-id 'slang-lsp))
+  :new-connection (lsp-stdio-connection
+                   "/Users/elkhantour/.vscode/extensions/shader-slang.slang-language-extension-2.0.10-darwin-x64/server/bin/darwin-x64/slangd")
+  :activation-fn (lsp-activate-on "slang")
+  :server-id 'slangd
+  :initialized-fn (lambda (workspace)
+                    (with-lsp-workspace workspace
+                      (lsp--set-configuration
+                       (lsp-configuration-section "slang"))))))
+
+(lsp-register-custom-settings
+ '(("slang.searchInAllWorkspaceDirectories" t t)))
+
 
 ;; Auto-start lsp in slang-mode buffers
 (add-hook 'slang-mode-hook #'lsp);; slang mode 
-(add-to-list 'load-path "~/.emacs.d/code")
-(require 'slang-mode)
-;; Tell lsp-mode where slangd is (optional if in PATH)
-(setq slang-lsp-server-executable "/usr/local/bin/slangd")
-
-;; Register the slang-mode client for lsp-mode
-(require 'lsp-mode)
-(lsp-register-client
- (make-lsp-client
-  :new-connection (lsp-stdio-connection slang-lsp-server-executable)
-  :major-modes '(slang-mode)
-  :server-id 'slang-lsp))
-
-;; Auto-start lsp in slang-mode buffers
-(add-hook 'slang-mode-hook #'lsp)
