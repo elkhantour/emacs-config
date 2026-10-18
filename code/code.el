@@ -140,3 +140,7 @@
 
 ;; C# Mode
 (add-to-list 'auto-mode-alist '("\\.cs\\'" . csharp-mode))
+
+
+;; redirect magit git path
+(setq magit-git-executable "/usr/bin/git")

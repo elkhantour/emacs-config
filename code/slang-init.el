@@ -1,6 +1,6 @@
-;; slang-mode setup
-(add-to-list 'load-path "~/.emacs.d/code")
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/code"))
 (require 'slang-mode)
+(require 'lsp-mode)
 
 ;; Path to slangd
 (setq slang-lsp-server-executable "/usr/local/bin/slangd")
@@ -13,28 +13,23 @@
 2. Place them somewhere (e.g., ~/slang)\n\
 3. Create a symlink: sudo ln -s ~/slang/slang-<version>/bin/slangd /usr/local/bin/slangd"))
 
-;; lsp-mode setup
-(require 'lsp-mode)
-;(lsp-register-client
-; (make-lsp-client
-;  :new-connection (lsp-stdio-connection slang-lsp-server-executable)
-;  :major-modes '(slang-mode)
-;  :server-id 'slang-lsp))
+;; Must be at the front of the list, since slang-mode derives from c-mode
+(add-to-list 'lsp-language-id-configuration '(slang-mode . "slang"))
+
+(lsp-register-custom-settings
+ '(("slang.searchInAllWorkspaceDirectories" t t)))
 
 (lsp-register-client
  (make-lsp-client
-  :new-connection (lsp-stdio-connection
-                   "/Users/elkhantour/.vscode/extensions/shader-slang.slang-language-extension-2.0.10-darwin-x64/server/bin/darwin-x64/slangd")
+  :new-connection (lsp-stdio-connection slang-lsp-server-executable)
   :activation-fn (lsp-activate-on "slang")
+  :priority 1
+  :multi-root t
   :server-id 'slangd
   :initialized-fn (lambda (workspace)
                     (with-lsp-workspace workspace
                       (lsp--set-configuration
                        (lsp-configuration-section "slang"))))))
 
-(lsp-register-custom-settings
- '(("slang.searchInAllWorkspaceDirectories" t t)))
-
-
-;; Auto-start lsp in slang-mode buffers
-(add-hook 'slang-mode-hook #'lsp);; slang mode 
+;(setq lsp-enabled-clients '(slangd))
+(add-hook 'slang-mode-hook #'lsp)
